@@ -431,10 +431,10 @@ __global__ void kernel_double_add(
 
   uint32_t d = sigma_0 + instance_i;
   int swapped = 0;
-  for (uint32_t b = s_bits_start; b < s_bits_start + s_bits_interval; b++) {
+  for (uint64_t b = s_bits_start; b < s_bits_start + s_bits_interval; b++) {
     /* Process bits from MSB to LSB, last index to first index
      * b counts from 0 to s_num_bits */
-    int nth = s_bits - 1 - b;
+    uint64_t nth = s_bits - 1 - b;
     int bit = (gpu_s_bits[nth/32] >> (nth&31)) & 1;
     if (bit != swapped) {
         swapped = !swapped;
